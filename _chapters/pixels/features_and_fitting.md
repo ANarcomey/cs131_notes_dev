@@ -1,13 +1,35 @@
 ---
 title: Features and fitting
-keywords: RANSAC,
+keywords: RANSAC, Harris
 order: 5 # Lecture number for 2020
 ---
 
+[//]: # (TODO!!!  ** overall intro **)
+
+
+Table of content
+
+- [RANSAC](#ransac)
+  - [Lines](#lines)
+  - [Model Fitting](#model-fitting)
+  - [Voting Based Fitting](#voting-based-fitting)
+  - [Random Sample Consensus](#random-sample-consensus)
+- [Local Invariant Features](#local-invariant-features)
+- [Harris Corner Detector](#harris-corner-detector)
+
+[//]: # (This is how you can make a comment that won't appear in the web page! It might be visible on some machines/browsers so use this only for development.)
+
+[//]: # (Notice in the table of contents that [First Big Topic] matches #first-big-topic, except for all lowercase and spaces are replaced with dashes. This is important so that the table of contents links properly to the sections)
+
+[//]: # (Leave this line here, but you can replace the name field with anything! It's used in the HTML structure of the page but isn't visible to users)
+
+
+<a name='ransac'></a>
+#RANSAC
+
 In this lecture, we will introduce model fitting for line detection using the RANSAC (Random Sample Consensus) algorithm.
 
-<a name='intro'></a>
-
+<a name='lines'></a>
 ## Lines
 
 Straight lines characterize many objects around us. Here are few examples where line detection is useful:
@@ -23,6 +45,7 @@ Looking at these examples and intuitively thinking of line detection, few questi
 
 _Note:_ Edge detection is a technique that is used to identify boundaries. It does not provide information on the orientation of pixels. For example, whether these pixels form a line or corner.
 
+<a name='model-fitting'></a>
 ## Model Fitting
 
 We would like to form a higher-level succinct representation of the features in the image by grouping multiple features based on a simple model. This section focuses on lines described as one such model (i.e. line fitting) with edge points as features.
@@ -41,6 +64,7 @@ Least squares regression is a common technique to find a line of best fit for a 
   <img src="{{ site.baseurl }}/assets/pixels/line-fitting-outliers.png">
 </div>
 
+<a name='voting-based-fitting'></a>
 ## Voting-based Fitting
 
 We could try to fit the model by exhaustively checking all combination of features. However, this approach is inefficient and bears a O(N<sup>2</sup>) time complexity.
@@ -53,6 +77,7 @@ Voting is a decent alternative. The idea is to have features vote for compatible
 
 <!-- <<image 4.6 slide 11>> -->
 
+<a name='random-sample-consensus'></a>
 ## Random Sample Consensus (RANSAC)
 
 Both Hough transform and RANSAC rely on voting to arrive at the optimum model. The part where they differ is in how the model is chosen. As the name suggests, RANSAC introduces randomness in the model selection process. A number of models are proposed until one is found that is supported by a consensus of features (voters). Let's try to understand the algorithm.
@@ -106,3 +131,9 @@ The table below shows the number of samples required for different choices of no
 **Analysis**
 
 **Summary**
+
+<a name='local-invariant-features'></a>
+# Local Invariant Features
+
+<a name='harris-corner-detector'></a>
+# Harris Corner Detector
